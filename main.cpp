@@ -3,10 +3,11 @@
 #include <vector>
 using namespace std;
 
+int playerChoise;
 const int N = 3;
 const int C = 1;
 
-int main() {
+void showDataBase() {
 
     string weightFile = "10";
     string nameFile = "main";
@@ -22,6 +23,35 @@ int main() {
             cout << "    ";
         }
     }
+}
 
-    return 0;
+void choiseParagraph() {
+
+    cout << "1. Add file" << endl;
+    cout << "2. Remove file" << endl;
+    cout << "3. Show DataBase" << endl;
+
+    cin >> playerChoise;
+    if (playerChoise == 1) {
+        cout << "Add file" << endl;
+    }
+    else if (playerChoise == 2) {
+        cout << "Remove file" << endl;
+    }
+    else if (playerChoise == 3) {
+        cout << "Show DataBase" << endl;
+        showDataBase();
+    }
+    else {
+        cout << "Error : Incorrect paragraph" << endl;
+    }
+
+}
+
+int main() {
+
+    cout << "File DataBase" << endl;
+    cout << " " << endl;
+    choiseParagraph();
+
 }
