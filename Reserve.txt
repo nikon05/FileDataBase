@@ -1,0 +1,80 @@
+#include <iostream>
+#include <filesystem>
+#include <cstdlib>
+#include <fstream>
+
+using namespace std;
+namespace fs = filesystem;
+using namespace fs;
+
+path folderPath;
+ofstream fout;
+
+void userChoice() {
+    int choice;
+    cout << " " << endl;
+
+    cout << "Выберите действие: \n 1. Создать файл в папке \n 2. Удалить файл в папке \n 3. Изменить содержимое файла" << endl;
+    cin >> choice;
+
+    if (choice == 1) {
+        string path;
+
+        cout << " " << endl;
+        cout << "Введите название файла: ";
+        cin >> path;
+
+        fout.open(path + ".txt");
+        if (!fout.is_open()) {
+            cout << "Err: Файл не был создан!" << endl;
+            userChoice();
+        }
+        else {
+            fout.close();
+            userChoice();
+        }
+    }
+    else if (choice == 2) {
+        cout << "Test2";
+    }
+    else if (choice == 3) {
+        cout << "Test3";
+    }
+    else {
+        cout << "Err: Неизвестное действие!";
+        userChoice();
+    }
+}
+
+int main() {
+    string folderName;
+    bool createDirectory = false;
+    setlocale(LC_ALL, "Russian");
+
+    cout << "==============================" << endl;
+    cout << "|                            |" << endl;
+    cout << "|       FILEDATABASE         |" << endl;
+    cout << "|                            |" << endl;
+    cout << "==============================" << endl;
+    
+    cout << " " << endl;
+
+    while (createDirectory == false) {
+        cout << "Напишите название новой папки: ";
+        cin >> folderName;
+
+        path folderPath = current_path() / folderName;
+
+        if (!exists(folderPath)) {
+            create_directory(folderPath);
+            cout << "Успешно!\n";
+
+            createDirectory = true;
+            userChoice();
+        }
+        else {
+            cout << "Err: Такая папка уже создана!\n";
+        }
+    }
+    return 0;
+}
